@@ -37,25 +37,13 @@ LineSegment::LineSegment(double x0_, double y0_, double x1_, double y1_) {
 #endif
 
     if (m < -1.0) {
-      // TODO:
-      //  Call `bresenhamAlgorithm` with corresponding arguments.
-      //  Hint: All these four cases (for slope) could be dealed with the function `bresenhamAlgorithm`.
-      //        Just consider what arguments to pass in.
-    } else if (m < 0)  // 1.0 < m < 0
-    {
-      // TODO:
-      //  Call `bresenhamAlgorithm` with corresponding arguments.
-      //  Hint: All these four cases (for slope) could be dealed with the function `bresenhamAlgorithm`.
-      //        Just consider what arguments to pass in.
-    } else if (m <= 1.0)  // 0 <= m <= 1.0
-    {
+      bresenhamAlgorithm(y1, x1, y0, x0, true);
+    } else if (m < 0) { // 1.0 < m < 0
       bresenhamAlgorithm(x0, y0, x1, y1, false);
-    } else  // 1.0 < m
-    {
-      // TODO:
-      //  Call `bresenhamAlgorithm` with corresponding arguments.
-      //  Hint: All these four cases (for slope) could be dealed with the function `bresenhamAlgorithm`.
-      //        Just consider what arguments to pass in.
+    } else if (m <= 1.0) {  // 0 <= m <= 1.0
+      bresenhamAlgorithm(x0, y0, x1, y1, false);
+    } else { // 1.0 < m
+      bresenhamAlgorithm(y0, x0, y1, x1, true);
     }
   }
 }

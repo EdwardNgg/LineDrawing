@@ -26,11 +26,11 @@ HOWEVER, THE MOUSE AND KEYBOARD FUNCTIONALITIES SHOULD BE THE SAME AS SPECIFIED 
 ## Features Implemented
 
 - [x] P1: Line segment
-    - [ ]: Slope m < -1
-    - [ ]: -1 <= m < 0
-    - [x]: 0 <= m <= 1
-    - [ ]: 1 < m
-    - [ ]: Vertical
+    - [ ] Slope m < -1
+    - [ ] -1 <= m < 0
+    - [x] 0 <= m <= 1
+    - [ ] 1 < m
+    - [x] Vertical
 - [ ] P2: Ploy-line
 - [ ] P3: Polygon
 - [ ] P4: Circle

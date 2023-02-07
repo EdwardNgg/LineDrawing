@@ -6,15 +6,13 @@
 Shape::~Shape() = default;
 
 
-const std::vector<glm::vec2> & Shape::getPath()
-{
-    return path;
+const std::vector<glm::vec2> &Shape::getPath() {
+  return path;
 }
 
 
-void Shape::appendToPath(int x, int y)
-{
-    path.emplace_back(x, y);
+void Shape::appendToPath(int x, int y) {
+  path.emplace_back(x, y);
 }
 
 

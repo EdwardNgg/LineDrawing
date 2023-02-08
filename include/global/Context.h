@@ -65,7 +65,7 @@ public:
 
     // used for polyline
     std::size_t mouseClickCount {0};
-    std::vector<glm::vec2> vertexBufferDataPloyLine;
+    std::vector<glm::vec2> vertexBufferDataPolyLine;
 
 private:
     Context();

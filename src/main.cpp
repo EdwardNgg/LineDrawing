@@ -84,8 +84,8 @@ int main() {
 }
 
 
-void
-keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods) {
+void keyCallback(GLFWwindow *window, int key, int scancode, int action,
+                 int mods) {
   if (action == GLFW_PRESS) {
     switch (key) {
       case GLFW_KEY_1: {
@@ -155,10 +155,7 @@ void mouseButtonCallback(GLFWwindow *window, int button, int action, int mods) {
         context.showPreview = true;
 
         if (context.mouseClickCount > 1) {
-          // TODO:
-          //  A new line segment is added to the current polygon.
-          //  Append `context.VertexBufferData` (storing all pixels passed by the new line segment)
-          //  to `context.VertexBufferDataPolyLine`.
+          context.vertexBufferDataPolyLine = context.vertexBufferData;
         }
       } else if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS) {
         if (context.state == Context::POLYGON) {
@@ -169,7 +166,7 @@ void mouseButtonCallback(GLFWwindow *window, int button, int action, int mods) {
           //  to `context.vertexBufferData`.
         }
 
-        context.vertexBufferDataPloyLine.clear();
+        context.vertexBufferDataPolyLine.clear();
         context.mouseClickCount = 0;
         context.showPreview = false;
       }
@@ -222,13 +219,17 @@ void cursorPosCallback(GLFWwindow *window, double xpos, double ypos) {
       }
       case Context::POLYLINE:
       case Context::POLYGON: {
-        // TODO:
-        //  Update `context.vertexBufferData` properly.
-        //  Hint: `context.vertexBufferData` should contain pixels passed by the following two stuff:
-        //  1. The finalized line segments
-        //     (whose pixels should be stored in `context.vertexBufferDataPolyLine`);
-        //  2. The currently-moving line segment
-        //     (whose pixels are stored in `currentLineSegment`).
+        // Copy the previous lines and add the new line segment preview.
+        std::vector<glm::vec2> currentLines =
+            context.vertexBufferDataPolyLine;
+        currentLines.insert(
+            currentLines.end(),
+            currentLineSegment.getPath().cbegin(),
+            currentLineSegment.getPath().cend()
+            );
+
+        context.vertexBufferData = currentLines;
+        break;
       }
       case Context::CIRCLE: {
         context.vertexBufferData = Circle(context.lastMouseLeftPressXPos,

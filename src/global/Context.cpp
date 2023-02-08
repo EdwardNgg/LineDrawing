@@ -88,6 +88,6 @@ void Context::setState(State s)
     vertexBufferData.clear();
 
     mouseClickCount = 0;
-    vertexBufferDataPloyLine.clear();
+    vertexBufferDataPolyLine.clear();
 }
 

@@ -149,6 +149,11 @@ void mouseButtonCallback(GLFWwindow *window, int button, int action, int mods) {
     case Context::POLYGON: {
       if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
         ++context.mouseClickCount;
+        // Set the first X and Y position if the first click is made
+        if (context.mouseClickCount == 1) {
+          context.firstXPos = context.cursorXPos;
+          context.firstYPos = context.cursorYPos;
+        }
 
         context.lastMouseLeftPressXPos = context.cursorXPos;
         context.lastMouseLeftPressYPos = context.cursorYPos;
@@ -158,12 +163,25 @@ void mouseButtonCallback(GLFWwindow *window, int button, int action, int mods) {
           context.vertexBufferDataPolyLine = context.vertexBufferData;
         }
       } else if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS) {
-        if (context.state == Context::POLYGON) {
-          // TODO:
-          //  A new polygon is finalized.
-          //  Connect its last and first vertices
-          //  and append all pixels passed by this line segment
-          //  to `context.vertexBufferData`.
+        if (context.state == Context::POLYGON && context.mouseClickCount >= 3) {
+          // Create the final line segment connecting the last point to the
+          // first point.
+          LineSegment finalLineSegment = LineSegment(
+              context.lastMouseLeftPressXPos,
+              context.lastMouseLeftPressYPos,
+              context.firstXPos,
+              context.firstYPos
+              );
+
+          // Insert the final line segment into the polyline buffer.
+          context.vertexBufferDataPolyLine.insert(
+              context.vertexBufferDataPolyLine.end(),
+              finalLineSegment.getPath().cbegin(),
+              finalLineSegment.getPath().cend()
+              );
+
+          // Copy the new points to the vertex buffer.
+          context.vertexBufferData = context.vertexBufferDataPolyLine;
         }
 
         context.vertexBufferDataPolyLine.clear();

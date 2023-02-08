@@ -32,7 +32,7 @@ HOWEVER, THE MOUSE AND KEYBOARD FUNCTIONALITIES SHOULD BE THE SAME AS SPECIFIED 
     - [x] 1 < m
     - [x] Vertical
 - [x] P2: Ploy-line
-- [ ] P3: Polygon
+- [x] P3: Polygon
 - [ ] P4: Circle
 - [ ] P5: Ellipse
 - [ ] P6: Cubic curve

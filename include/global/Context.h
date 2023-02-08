@@ -56,6 +56,9 @@ public:
     double cursorXPos = 0;
     double cursorYPos = 0;
 
+    double firstXPos = 0;
+    double firstYPos = 0;
+
     bool showPreview {false};
 
     // used for OpenGL rendering commands

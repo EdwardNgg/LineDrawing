@@ -1,6 +1,3 @@
-#include <cmath>
-#include <iostream>
-
 #include "shape/Circle.h"
 
 Circle::Circle(double x0_, double y0_, double x1_, double y1_) {
@@ -17,8 +14,8 @@ void Circle::midpointAlgorithm(int x0, int y0, int x1, int y1) {
   // Calculate the radius.
   int dx = std::abs(x1 - x0);
   int dy = std::abs(y1 - y0);
-  double dx2 = std::pow(dx, 2);
-  double dy2 = std::pow(dy, 2);
+  int dx2 = dx * dx;
+  int dy2 = dy * dy;
   int r = static_cast<int>(std::sqrt(dx2 + dy2));
 
   // Determine first point on the circle as (0, r) and decision parameter for
@@ -26,8 +23,8 @@ void Circle::midpointAlgorithm(int x0, int y0, int x1, int y1) {
   // Note that the circle is translated such that the center is at (0, 0).
   int x = 0;
   int y = r;
-  circlePlotPoints(x0, y0, glm::ivec2(x, y));
   int p = 1 - r;
+  circlePlotPoints(x0, y0, glm::ivec2(x, y));
 
 
   // Plot points based on symmetry, incrementing the decision parameter until

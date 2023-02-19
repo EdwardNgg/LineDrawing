@@ -54,7 +54,7 @@ int main() {
   }
 
   // 3. Build and compile our shader program
-  Shader shader("../src/shader/vert.glsl", "../src/shader/frag.glsl");
+  Shader shader("./src/shader/vert.glsl", "./src/shader/frag.glsl");
   shader.use();
 
   shader.setFloat("windowWidth", static_cast<float>(context.WINDOW_WIDTH));

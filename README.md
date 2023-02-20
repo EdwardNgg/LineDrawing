@@ -1,4 +1,4 @@
-# PA1
+# Line Drawing (PA1)
 
 Edward Ng
 
@@ -8,20 +8,10 @@ edward.ng@stonybrook.edu
 
 ## Overview
 
-Implemented a prototype for this PA, including GUI and most frontend logic.
-**except** several critical parts left to students:
-
-- All midpoint algorithm as left to students to implement;
-- Frontend logic for poly-lines and polygons are also considered critical part
-  because they can be implemented only with frontend logic by stacking vertex buffers of multiple line segments;
-
-The program has reserved TODOs for students in proper location.
-
-ALL README FILES IN FUTURE PAS SHOULD ALSO BE IN THE SAME FORMAT AS THIS ONE.
-
-THIS TEMPLATE IS JUST FOR YOUR REFERENCE AND A QUICK START.
-PLEASE FEEL FREE TO WRITE YOUR OWN PROGRAM FROM SCRATCH (I.E., NOT USING THIS TEMPLATE).
-HOWEVER, THE MOUSE AND KEYBOARD FUNCTIONALITIES SHOULD BE THE SAME AS SPECIFIED IN THIS README.
+The Line Drawing (PA1) program is a CSE328: Fundamentals of Computer Graphics assignment and builds on the provided 
+template. The program draws the lines of a variety of primitive structures listed below. Each shape is drawn based on 
+the Bresenham midpoint algorithm. Furthermore, drawings for poly-lines and polygons build on top of the frame buffers 
+with multiple line segments.
 
 ## Features Implemented
 
@@ -34,20 +24,55 @@ HOWEVER, THE MOUSE AND KEYBOARD FUNCTIONALITIES SHOULD BE THE SAME AS SPECIFIED 
 - [x] P2: Ploy-line
 - [x] P3: Polygon
 - [x] P4: Circle
-- [ ] P5: Ellipse
-- [ ] P6: Cubic curve
+- [x] P5: Ellipse
+- [x] P6: Cubic curve
 
 ## Usage
+The program completely follows the usage patterns specified in the requirements.
 
-If your program has more functionalities not mentioned in the manual,
-you may write their usage here.
+### Line Segments
+To start drawing line segments, press key `1`. Left-clicking the mouse will specify the starting position of the line segment. After moving the mouse cursor to the endpoint, a right click finalizes the line segment.
 
-If your program failed to obey the required mouse/keyboard usage,
-you may write your own setting here.
-In this case, penalties may apply.
+### Poly-Lines
+To start drawing poly-lines, press key `2`. Consecutive left clicks will add new vertices to the poly-line. Right-clicking will finalize the poly-line.
+
+### Polygons
+To start drawing polygons, press key `3`. Like the poly-line, consecutive left clicks will add new vertices to the polygon. However, right-clicking will connect the last vertex to the first, finalizing the polygon.
+
+### Circles
+To start drawing circles, press key `4`. A left click will specify the center, and a right click will indicate any point on the figure.
+
+### Ellipses
+To start drawing ellipses, press key `5`. Left-clicking will specify the ellipse's center. Right-clicking will determine the two radii of the ellipse, which aligns to the window.
+
+### Cubic Curves
+The equation for a polynomial curve is the following.
+```
+y = ax^3 + bx^2 + cx + d
+```
+To start plotting polynomial curves, press key '6'. The program reads the parameters of the polynomial from the text file `./etc/parameters.txt`. The file contains the four space-separated floating-point numbers in one line, denoting 'a', 'b', 'c', and 'd'. For quadratic curves, set 'a' to '0'. For more information, refer to the appendix.
+
 
 ## Appendix
 
-Please include any other stuff you would like to mention in this section.
-E.g., your suggestion on possible combinations of cubic curve parameters in this programming assignment. 
+The line-drawing program supports drawing curves, but it has some limitations. The cubic curve functionality supports 
+any combination of numbers in the parameter text file as long as they are reasonable. For example, based on the cubic 
+equation `y = ax^3 + bx^2 + cx + d`, the following parameter text file works with the program.
+```text
+0.000003 -0.006 3 500
+```
+As a suggestion, the values are best in the following ranges.
+```
+-0.00001 <= a <= 0.00001
+-0.01 <= b <= 0.01
+-1.0 <= c <= 1.0
+0 <= d <= 1000
+```
 
+Furthermore, the program supports quadratic curves by setting `a` to 0.0.
+
+> ⚠️ Warning
+> 
+> The program is limited to curves that start on the left of the window and only intersect the window twice. If a curve 
+> intersects the windows more than twice, the program will not draw the second segment. It is a limitation to prevent 
+> the program from hanging on curves with massive slopes.
